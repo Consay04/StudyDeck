@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StudyDeck — Study Planner Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="logo">◆</span> StudyDeck <small>study planner</small></div>
+  <div class="actions">
+    <button class="btn ghost" id="addSubjectBtn">+ Subject</button>
+    <button class="btn primary" id="addTaskBtn">+ New Task</button>
+  </div>
+</header>
+
+<main>
+  <section class="stats" id="stats"></section>
+
+  <div class="grid">
+    <div class="col">
+      <section class="card">
+        <div class="card-head"><h2>Tasks</h2>
+          <div class="filters">
+            <select id="fStatus">
+              <option value="all">All status</option>
+              <option value="todo">To do</option>
+              <option value="doing">In progress</option>
+              <option value="done">Done</option>
+            </select>
+            <select id="fSubject"></select>
+          </div>
+        </div>
+        <ul class="tasks" id="tasks"></ul>
+      </section>
+    </div>
+
+    <div class="col">
+      <section class="card">
+        <div class="card-head"><h2>Focus Timer</h2></div>
+        <div class="timer">
+          <div class="time" id="time">25:00</div>
+          <select id="timerSubject"></select>
+          <div class="row">
+            <label>Minutes <input type="number" id="timerMins" value="25" min="1" max="180"></label>
+          </div>
+          <div class="row">
+            <button class="btn primary" id="startBtn">Start</button>
+            <button class="btn ghost" id="stopBtn">Stop &amp; save</button>
+          </div>
+          <p class="hint" id="timerMsg">Study sessions are saved to your stats.</p>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-head"><h2>Last 7 days</h2><span class="muted" id="weekTotal"></span></div>
+        <div class="chart" id="chart"></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head"><h2>Subjects</h2></div>
+        <div id="subjects"></div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<dialog id="taskDlg">
+  <form id="taskForm" method="dialog">
+    <h3 id="taskDlgTitle">New Task</h3>
+    <label>Title <input name="title" required maxlength="120"></label>
+    <label>Subject <select name="subject_id" id="taskSubject" required></select></label>
+    <div class="two">
+      <label>Due date <input type="date" name="due_date"></label>
+      <label>Priority
+        <select name="priority"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select>
+      </label>
+    </div>
+    <label>Status
+      <select name="status"><option value="todo">To do</option><option value="doing">In progress</option><option value="done">Done</option></select>
+    </label>
+    <label>Notes <textarea name="notes" rows="3"></textarea></label>
+    <div class="dlg-actions">
+      <button type="button" class="btn ghost" data-close>Cancel</button>
+      <button type="submit" class="btn primary">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="subjectDlg">
+  <form id="subjectForm" method="dialog">
+    <h3 id="subjectDlgTitle">New Subject</h3>
+    <label>Name <input name="name" required maxlength="60"></label>
+    <div class="two">
+      <label>Color <input type="color" name="color" value="#7c5cff"></label>
+      <label>Weekly goal (hours) <input type="number" name="goal_hours" value="5" min="1" step="0.5"></label>
+    </div>
+    <div class="dlg-actions">
+      <button type="button" class="btn ghost" data-close>Cancel</button>
+      <button type="submit" class="btn primary">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
